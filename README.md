@@ -1,0 +1,1 @@
+# fast-synapse-deploy-action
