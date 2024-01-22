@@ -1,5 +1,5 @@
-name: Hello, World!
-description: Greet someone and record the time
+name: Fast Synapse Deploy
+description: Deploy Azure Synapse artifacts
 author: Shawn McGough
 
 inputs:
@@ -7,10 +7,6 @@ inputs:
     description: Who to greet
     required: true
     default: World
-
-outputs:
-  time:
-    description: The time we greeted you
 
 runs:
   using: docker
