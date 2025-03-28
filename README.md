@@ -1,11 +1,16 @@
-# Fast Synapse Deploy
+<h1 style="display: flex; align-items: center; gap: 10px;">
+  <img src="icon.png" width="48" alt="icon"> Fast Synapse Deploy 
+</h1>
+
+
+
 
 ## Overview
-This action will deploy Azure Synapse artifacts using the publish branch.
+This action will deploy Azure Synapse artifacts, fast!
 
 ### Major Features
  - Optimized for speed using connection pooling and multiple async requests to the Synapse API.
- - Leverages Azure CLI for authentication.
+ - Leverages Azure Login for authentication.
  - Supports HTTP_PROXY, HTTPS_PROXY, and NO_PROXY environment variables.
  - Can be combined with `validate` from [Microsoft action](https://github.com/marketplace/actions/synapse-workspace-deployment) (see note below).
  - Works on Linux or Windows runners.
@@ -24,7 +29,7 @@ steps:
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-    - uses: ShawnMcGough/fast-synapse-deploy-action@main
+    - uses: ShawnMcGough/fast-synapse-deploy@v1
     with:
         template: 'TemplateForWorkspace.json'
         parameters: 'TemplateParametersForWorkspace.json'
@@ -50,13 +55,8 @@ This action can work in tandem with the Microsoft `validate` action, which is re
 ## SYNAPSE_API_LIMIT
 This action seeks to deploy artifacts as quickly as possible. To that end, it will make multiple concurrent requests to the Synapse API. Depending on usage patterns (multiple and/or frequent deployments, for example), the Synapse API might respond with `TooManyRequests [429]`. The `SYNAPSE_API_LIMIT` environment variable is used to limit the number of concurrent requests to try and mitigate this issue.  Unfortunately, the Synapse API does not implement a `retry-after` header, so the entire deploy must be terminated.
 
-## Review Me
-Please consider [leaving a review](https://marketplace.visualstudio.com/items?itemName=shawn-mcgough.fast-synapse-deploy&ssr=false#review-details). I love to hear how it is helping with deployments!
-At the end of the log there is duration information:
-```
-Completed deploy in 00:01:16.2082239.
-Completed delete in 00:00:32.3423195.
-```
+## Star Me
+Please consider [leaving a star]() if your workspace was deployed faster!
 
 ## Release Notes
 
