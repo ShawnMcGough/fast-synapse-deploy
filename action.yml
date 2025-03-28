@@ -40,10 +40,11 @@ runs:
       if: runner.os == 'Windows'
       shell: pwsh
       run: |
+        $deleteArtifacts = if ("${{ inputs.delete-artifacts }}" -eq "true") { "true" } else { "false" }
         & "${{ github.action_path }}/SynapseDeploy.exe" `
           "${{ github.workspace }}/${{ inputs.template }}" `
           "${{ github.workspace }}/${{ inputs.parameters }}" `
           "${{ inputs.subscription-id }}" `
           "${{ inputs.resource-group }}" `
           "${{ inputs.workspace-name }}" `
-          ${{ inputs.delete-artifacts == 'true' ? 'true' : 'false' }}
+          $deleteArtifacts
