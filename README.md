@@ -8,6 +8,7 @@ This action will deploy Azure Synapse artifacts using the publish branch.
  - Leverages Azure CLI for authentication.
  - Supports HTTP_PROXY, HTTPS_PROXY, and NO_PROXY environment variables.
  - Can be combined with `validate` from [Microsoft action](https://github.com/marketplace/actions/synapse-workspace-deployment) (see note below).
+ - Works on Linux or Windows runners.
 
 ## Pre-requisites for the action
 Requires [Azure Login Action](https://github.com/marketplace/actions/azure-login) for authentication.
