@@ -60,6 +60,8 @@ This action seeks to deploy artifacts as quickly as possible. To that end, it wi
 
 ## Star Me
 Please consider [leaving a star]() if your workspace was deployed faster!
+Also [leave a comment](https://github.com/ShawnMcGough/fast-synapse-deploy/discussions/categories/general). I love to hear how it is helping with deployments!
+
 
 ## Release Notes
 
