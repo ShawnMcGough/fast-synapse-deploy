@@ -21,6 +21,7 @@ This action will deploy Azure Synapse artifacts, fast!
 ## Pre-requisites for the action
 Requires [Azure Login Action](https://github.com/marketplace/actions/azure-login) for authentication.
 
+The YAML pipeline might look something like this:
 ```yaml
 
 steps:
