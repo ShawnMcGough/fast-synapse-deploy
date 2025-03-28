@@ -31,8 +31,8 @@ runs:
       if: runner.os == 'Linux'
       shell: bash
       run: |
-        chmod +x ${{ github.action_path }}/SynapseDeploy
-        ${{ github.action_path }}/SynapseDeploy \
+        chmod +x ${{ github.action_path }}/src/SynapseDeploy
+        ${{ github.action_path }}/src/SynapseDeploy \
           "${{ github.workspace }}/${{ inputs.template }}" \
           "${{ github.workspace }}/${{ inputs.parameters }}" \
           "${{ inputs.subscription-id }}" \
@@ -45,7 +45,7 @@ runs:
       shell: pwsh
       run: |
         $deleteArtifacts = if ("${{ inputs.delete-artifacts }}" -eq "true") { "true" } else { "false" }
-        & "${{ github.action_path }}/SynapseDeploy.exe" `
+        & "${{ github.action_path }}/src/SynapseDeploy.exe" `
           "${{ github.workspace }}/${{ inputs.template }}" `
           "${{ github.workspace }}/${{ inputs.parameters }}" `
           "${{ inputs.subscription-id }}" `
