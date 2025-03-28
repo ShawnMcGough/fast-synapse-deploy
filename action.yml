@@ -21,6 +21,9 @@ inputs:
     description: 'Delete artifacts after deployment (true/false)'
     required: false
     default: 'true'
+  override-parameters:
+    description: 'Override parameters (-key1 value1 -key2 value2)'
+    required: false
 runs:
   using: 'composite'
   steps:
@@ -35,7 +38,8 @@ runs:
           "${{ inputs.subscription-id }}" \
           "${{ inputs.resource-group }}" \
           "${{ inputs.workspace-name }}" \
-          ${{ inputs.delete-artifacts == 'true' && 'true' || 'false' }}
+          ${{ inputs.delete-artifacts == 'true' && 'true' || 'false' }} \
+          ${{ inputs.override-parameters }}
     - name: Deploy from Windows
       if: runner.os == 'Windows'
       shell: pwsh
@@ -47,4 +51,5 @@ runs:
           "${{ inputs.subscription-id }}" `
           "${{ inputs.resource-group }}" `
           "${{ inputs.workspace-name }}" `
-          $deleteArtifacts
+          $deleteArtifacts `
+          ${{ inputs.override-parameters }}
