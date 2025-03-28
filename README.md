@@ -10,7 +10,29 @@ This action will deploy Azure Synapse artifacts using the publish branch.
  - Can be combined with `validate` from [Microsoft action](https://github.com/marketplace/actions/synapse-workspace-deployment) (see note below).
 
 ## Pre-requisites for the action
-Requires [Azure Login Action](https://github.com/marketplace/actions/azure-login).
+Requires [Azure Login Action](https://github.com/marketplace/actions/azure-login) for authentication.
+
+```yaml
+
+steps:
+    - uses: actions/checkout@v4
+    - name: Azure Login
+    uses: azure/login@v2
+    with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    - uses: ShawnMcGough/fast-synapse-deploy-action@main
+    with:
+        template: 'TemplateForWorkspace.json'
+        parameters: 'TemplateParametersForWorkspace.json'
+        subscription-id: '${{ secrets.AZURE_SUBSCRIPTION_ID }}'
+        resource-group: 'synapse-rg'
+        workspace-name: 'workspace'
+        delete-artifacts: 'true' 
+
+```
 
 ## Not Supported 
  - Deploying ManagedPrivateEndpoints.
