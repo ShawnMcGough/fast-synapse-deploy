@@ -2,10 +2,25 @@ name: Fast Synapse Deploy
 description: Deploy Azure Synapse artifacts quickly!
 author: Shawn McGough
 inputs:
-  args:
-    description: 'Arguments'
+  template:
+    description: 'Path to the Synapse template file (relative to repository root)'
+    required: true
+  parameters:
+    description: 'Path to the Synapse parameters file (relative to repository root)'
+    required: true
+  subscription-id:
+    description: 'Azure Subscription ID'
+    required: true
+  resource-group:
+    description: 'Azure Resource Group name'
+    required: true
+  workspace-name:
+    description: 'Azure Synapse Workspace name'
+    required: true
+  delete-artifacts:
+    description: 'Delete artifacts after deployment (true/false)'
     required: false
-    default: ''
+    default: 'true'
 runs:
   using: 'composite'
   steps:
@@ -14,9 +29,21 @@ runs:
       shell: bash
       run: |
         chmod +x ${{ github.action_path }}/SynapseDeploy
-        ${{ github.action_path }}/SynapseDeploy ${{ inputs.args }}
+        ${{ github.action_path }}/SynapseDeploy \
+          "${{ github.workspace }}/${{ inputs.template }}" \
+          "${{ github.workspace }}/${{ inputs.parameters }}" \
+          "${{ inputs.subscription-id }}" \
+          "${{ inputs.resource-group }}" \
+          "${{ inputs.workspace-name }}" \
+          ${{ inputs.delete-artifacts == 'true' && 'true' || 'false' }}
     - name: Deploy from Windows
       if: runner.os == 'Windows'
       shell: pwsh
       run: |
-        ${{ github.action_path }}\SynapseDeploy.exe ${{ inputs.args }}
+        & "${{ github.action_path }}/SynapseDeploy.exe" `
+          "${{ github.workspace }}/${{ inputs.template }}" `
+          "${{ github.workspace }}/${{ inputs.parameters }}" `
+          "${{ inputs.subscription-id }}" `
+          "${{ inputs.resource-group }}" `
+          "${{ inputs.workspace-name }}" `
+          ${{ inputs.delete-artifacts == 'true' ? 'true' : 'false' }}
