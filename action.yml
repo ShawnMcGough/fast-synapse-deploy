@@ -1,15 +1,22 @@
 name: Fast Synapse Deploy
-description: Deploy Azure Synapse artifacts
+description: Deploy Azure Synapse artifacts quickly!
 author: Shawn McGough
-
 inputs:
-  who-to-greet:
-    description: Who to greet
-    required: true
-    default: World
-
+  args:
+    description: 'Arguments'
+    required: false
+    default: ''
 runs:
-  using: docker
-  image: Dockerfile
-  env:
-    INPUT_WHO_TO_GREET: ${{ inputs.who-to-greet }}
+  using: 'composite'
+  steps:
+    - name: Deploy from Linux
+      if: runner.os == 'Linux'
+      shell: bash
+      run: |
+        chmod +x ${{ github.action_path }}/SynapseDeploy
+        ${{ github.action_path }}/SynapseDeploy ${{ inputs.args }}
+    - name: Deploy from Windows
+      if: runner.os == 'Windows'
+      shell: pwsh
+      run: |
+        ${{ github.action_path }}\SynapseDeploy.exe ${{ inputs.args }}
