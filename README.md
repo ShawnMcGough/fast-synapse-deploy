@@ -1,6 +1,9 @@
-<h1 style="display: flex; align-items: center; gap: 10px;">
-  <img src="icon.png" width="48" alt="icon"> Fast Synapse Deploy 
-</h1>
+<table>
+  <tr>
+    <td><img src="icon.png" width="48" alt="icon"></td>
+    <td><h1>Fast Synapse Deploy</h1></td>
+  </tr>
+</table>
 
 
 
